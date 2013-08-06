@@ -30,3 +30,10 @@ class (MHask.IxCopointed t) => IxComonad t where
     => (m <~ t j k n) -> (t i j m <~ t i k n)
   iextend f = MHask.imap f ~<~ iduplicate
 
+
+-- | If you define your IxComonad in terms of iextend and iextract,
+-- then you get a free implementation of imap which can
+-- be used for IxFunctor.
+imapComonad :: (Monad m, Monad n, Monad (t j j n), IxComonad t)
+  => (m <~ n) -> (t i j m <~ t i j n)
+imapComonad f = iextend (f ~<~ MHask.iextract)

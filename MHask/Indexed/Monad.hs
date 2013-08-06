@@ -30,3 +30,10 @@ class (MHask.IxPointed t) => IxMonad t where
     => (m ~> t j k n) -> (t i j m ~> t i k n)
   ibind f = MHask.imap f ~>~ ijoin
 
+
+-- | If you define your IxMonad in terms of ibind and ireturn,
+-- then you get a free implementation of imap which can
+-- be used for IxFunctor.
+imapMonad :: (Monad m, Monad n, Monad (t j j n), IxMonad t)
+  => (m ~> n) -> (t i j m ~> t i j n)
+imapMonad f = ibind (f ~>~ MHask.ireturn)

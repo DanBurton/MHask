@@ -30,3 +30,10 @@ class (MHask.Copointed t) => Comonad t where
     => (m <~ t n) -> (t m <~ t n)
   extend f = MHask.fmap f ~<~ duplicate
 
+
+-- | If you define your Comonad in terms of extend and extract,
+-- then you get a free implementation of fmap which can
+-- be used for Functor.
+fmapComonad :: (Monad m, Monad n, Monad (t n), Comonad t)
+  => (m <~ n) -> (t m <~ t n)
+fmapComonad f = extend (f ~<~ MHask.extract)

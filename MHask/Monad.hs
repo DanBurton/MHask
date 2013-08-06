@@ -29,3 +29,11 @@ class (MHask.Pointed t) => Monad t where
      P.Monad (t (t n)))
     => (m ~> t n) -> (t m ~> t n)
   bind f = MHask.fmap f ~>~ join
+
+
+-- | If you define your Monad in terms of bind and return,
+-- then you get a free implementation of fmap which can
+-- be used for Functor.
+fmapMonad :: (P.Monad m, P.Monad n, P.Monad (t n), Monad t)
+  => (m ~> n) -> (t m ~> t n)
+fmapMonad f = bind (f ~>~ MHask.return)
