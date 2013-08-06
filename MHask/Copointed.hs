@@ -1,12 +1,9 @@
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE Rank2Types #-}
-
 
 -- | Compare to comonad.Control.Comonad (Copointed)
 module MHask.Copointed where
 
 
-import MHask.Util
+import MHask.Arrow
 
 import Data.Monoid
 import Control.Monad (liftM)

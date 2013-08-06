@@ -1,12 +1,9 @@
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE Rank2Types #-}
-
 
 -- | Compare to base.Prelude.Functor (Functor)
 module MHask.Functor where
 
 import Prelude hiding (Functor, fmap)
-import MHask.Util
+import MHask.Arrow
 
 import Control.Monad.Trans.State
 import Control.Monad.Trans.Reader

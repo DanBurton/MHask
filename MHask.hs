@@ -6,8 +6,8 @@
 -- 
 -- > import qualified MHask
 module MHask (
-  -- * Prelimiaries
-  module MHask.Util,
+  -- * Prelimiary
+  module MHask.Arrow,
 
   -- * Classes
   module MHask.Functor,
@@ -24,7 +24,7 @@ module MHask (
   module MHask.Indexed.Comonad,
   ) where
 
-import MHask.Util
+import MHask.Arrow
 
 import MHask.Functor
 import MHask.Pointed

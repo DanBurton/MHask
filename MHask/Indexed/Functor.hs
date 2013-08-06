@@ -1,11 +1,8 @@
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE Rank2Types #-}
-{-# LANGUAGE DefaultSignatures #-}
 
 -- | Compare to indexed.Data.Functor.Indexed (IxFunctor)
 module MHask.Indexed.Functor where
 
-import MHask.Util
+import MHask.Arrow
 
 import Control.Monad.Trans.State
 import Control.Monad.Trans.Reader

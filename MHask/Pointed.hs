@@ -1,12 +1,9 @@
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE Rank2Types #-}
-
 
 -- | Equivalent to transformers.Control.Monad.Trans.Class (MonadTrans)
 module MHask.Pointed where
 
 import Prelude hiding (return)
-import MHask.Util
+import MHask.Arrow
 
 import Data.Monoid
 import Control.Monad (liftM)

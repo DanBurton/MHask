@@ -1,13 +1,10 @@
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE Rank2Types #-}
-{-# LANGUAGE DefaultSignatures #-}
 
 -- | Compare to indexed.Control.Comonad.Indexed (IxComonad)
 module MHask.Indexed.Comonad where
 
 
 
-import MHask.Util
+import MHask.Arrow
 
 import qualified MHask.Indexed.Functor as MHask
 import qualified MHask.Indexed.Copointed as MHask

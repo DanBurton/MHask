@@ -1,13 +1,10 @@
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE Rank2Types #-}
-{-# LANGUAGE DefaultSignatures #-}
 
 -- | Compare to indexed.Control.Monad.Indexed (IxMonad)
 module MHask.Indexed.Monad where
 
 
 
-import MHask.Util
+import MHask.Arrow
 
 import qualified MHask.Indexed.Pointed as MHask
 import qualified MHask.Indexed.Functor as MHask

@@ -1,13 +1,10 @@
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE Rank2Types #-}
-{-# LANGUAGE DefaultSignatures #-}
 
 -- | Compare to base.Prelude (Monad)
 module MHask.Monad where
 
 import Prelude hiding (Monad, join)
 import qualified Prelude as P
-import MHask.Util
+import MHask.Arrow
 
 import qualified MHask.Functor as MHask
 import qualified MHask.Pointed as MHask

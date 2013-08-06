@@ -1,13 +1,10 @@
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE Rank2Types #-}
-{-# LANGUAGE DefaultSignatures #-}
 
 -- | Compare to comonad.Control.Comonad (Comonad)
 module MHask.Comonad where
 
 
 
-import MHask.Util
+import MHask.Arrow
 
 import qualified MHask.Functor as MHask
 import qualified MHask.Copointed as MHask

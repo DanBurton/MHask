@@ -43,6 +43,11 @@ source-repository this
   tag:      MHask-0.2.0.0
 
 library
-  exposed-modules:     MHask, MHask.Comonad, MHask.Monad, MHask.Copointed, MHask.Pointed, MHask.Util, MHask.Functor, MHask.Indexed.Comonad, MHask.Indexed.Monad, MHask.Indexed.Copointed, MHask.Indexed.Pointed, MHask.Indexed.Functor
+  exposed-modules:     MHask, MHask.Comonad, MHask.Monad, MHask.Copointed, MHask.Pointed, MHask.Arrow, MHask.Functor, MHask.Indexed.Comonad, MHask.Indexed.Monad, MHask.Indexed.Copointed, MHask.Indexed.Pointed, MHask.Indexed.Functor
 
   build-depends:       base >= 2 && < 4.7, transformers >= 0.3
+
+  extensions:          TypeOperators, Rank2Types, DefaultSignatures
+
+  ghc-options:         -Wall
+

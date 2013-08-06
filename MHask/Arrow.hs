@@ -1,5 +1,3 @@
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE Rank2Types #-}
 
 -- | This module sets the stage for the rest of the package.
 -- It defines a type synonym @~>@ which cleans up the
@@ -22,7 +20,7 @@
 -- You are encouraged to compare docs or even source files
 -- to see just how similar they are, all the way down
 -- to default implementations.
-module MHask.Util where
+module MHask.Arrow where
 
 -- | The @~>@ type represents arrows in the
 -- category of MHask. 

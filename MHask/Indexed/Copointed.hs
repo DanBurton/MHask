@@ -1,12 +1,9 @@
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE Rank2Types #-}
-{-# LANGUAGE DefaultSignatures #-}
 
 -- | Compare to indexed.Data.Functor.Indexed (IxCopointed)
 module MHask.Indexed.Copointed where
 
 
-import MHask.Util
+import MHask.Arrow
 
 
 
