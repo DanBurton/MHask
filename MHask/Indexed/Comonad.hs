@@ -1,3 +1,4 @@
+{-# LANGUAGE RankNTypes, TypeOperators, DefaultSignatures #-}
 
 -- | Compare to indexed.Control.Comonad.Indexed (IxComonad)
 module MHask.Indexed.Comonad where

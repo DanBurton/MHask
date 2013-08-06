@@ -1,3 +1,4 @@
+{-# LANGUAGE RankNTypes, TypeOperators, DefaultSignatures #-}
 
 -- | Equivalent to transformers.Control.Monad.Trans.Class (MonadTrans)
 module MHask.Pointed where

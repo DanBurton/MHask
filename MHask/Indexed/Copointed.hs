@@ -1,3 +1,4 @@
+{-# LANGUAGE RankNTypes, TypeOperators, DefaultSignatures #-}
 
 -- | Compare to indexed.Data.Functor.Indexed (IxCopointed)
 module MHask.Indexed.Copointed where

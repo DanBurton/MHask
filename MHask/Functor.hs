@@ -1,3 +1,4 @@
+{-# LANGUAGE RankNTypes, TypeOperators, DefaultSignatures #-}
 
 -- | Compare to base.Prelude.Functor (Functor)
 module MHask.Functor where

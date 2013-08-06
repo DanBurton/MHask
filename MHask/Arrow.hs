@@ -1,3 +1,4 @@
+{-# LANGUAGE RankNTypes, TypeOperators, DefaultSignatures #-}
 
 -- | This module sets the stage for the rest of the package.
 -- It defines a type synonym @~>@ which cleans up the

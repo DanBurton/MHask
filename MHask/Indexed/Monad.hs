@@ -1,3 +1,4 @@
+{-# LANGUAGE RankNTypes, TypeOperators, DefaultSignatures #-}
 
 -- | Compare to indexed.Control.Monad.Indexed (IxMonad)
 module MHask.Indexed.Monad where

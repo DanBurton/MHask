@@ -1,3 +1,4 @@
+{-# LANGUAGE RankNTypes, TypeOperators, DefaultSignatures #-}
 
 -- | Compare to indexed.Data.Functor.Indexed (IxFunctor)
 module MHask.Indexed.Functor where

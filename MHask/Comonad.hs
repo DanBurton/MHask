@@ -1,3 +1,4 @@
+{-# LANGUAGE RankNTypes, TypeOperators, DefaultSignatures #-}
 
 -- | Compare to comonad.Control.Comonad (Comonad)
 module MHask.Comonad where
