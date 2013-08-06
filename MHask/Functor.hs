@@ -13,7 +13,7 @@ import Control.Monad.Trans.Writer
 
 
 class Functor t where
-  fmap :: (Monad m, Monad n, Monad (t m), Monad (t n))
+  fmap :: (Monad m, Monad n)
     => (m ~> n) -> (t m ~> t n)
 
 

@@ -18,13 +18,16 @@ import Control.Monad.Trans.Writer
 
 
 class (MHask.Pointed t) => Monad t where
-  join :: (P.Monad m, P.Monad (t m), P.Monad (t (t m)))
+  join :: (P.Monad m)
+    => t (t m) ~> t m
+  default join :: (P.Monad m, P.Monad (t m))
     => t (t m) ~> t m
   join = bind id
 
-  bind :: (P.Monad m, P.Monad (t m), P.Monad n, P.Monad (t n))
+  bind :: (P.Monad m, P.Monad n)
     => (m ~> t n) -> (t m ~> t n)
-  default bind :: (P.Monad m, P.Monad (t m), P.Monad n, P.Monad (t n),
+  default bind :: (P.Monad m, P.Monad (t m),
+                   P.Monad n, P.Monad (t n),
                    P.Monad (t (t n)))
     => (m ~> t n) -> (t m ~> t n)
-  bind f = MHask.fmap f ~> join
+  bind f = MHask.fmap f ~>~ join

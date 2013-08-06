@@ -15,8 +15,9 @@ import qualified MHask.Pointed as MHask
 import qualified MHask.Indexed.Functor as MHask
 
 class (MHask.IxFunctor t) => IxPointed t where
-  ireturn :: (Monad m, Monad (t i i m))
+  ireturn :: (Monad m)
     => m ~> t i i m
-  default ireturn :: (Monad m, Monad (t i i m), MHask.Pointed (t i i))
+  default ireturn :: (Monad m,
+                      MHask.Pointed (t i i))
     => m ~> t i i m
   ireturn = MHask.return

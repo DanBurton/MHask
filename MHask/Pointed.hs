@@ -17,7 +17,7 @@ import Control.Monad.Trans.Class
 import qualified MHask.Functor as MHask
 
 class (MHask.Functor t) => Pointed t where
-  return :: (Monad m, Monad (t m))
+  return :: (Monad m)
     => (m ~> t m)
 
 

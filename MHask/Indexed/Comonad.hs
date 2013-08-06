@@ -16,19 +16,18 @@ import qualified MHask.Indexed.Copointed as MHask
 
 
 class (MHask.IxCopointed t) => IxComonad t where
-  iextend :: (Monad m, Monad n,
-             Monad (t i j m), Monad (t j k n), Monad (t i k m))
+  iextend :: (Monad m, Monad n)
     => (t j k m ~> n) -> (t i k m ~> t i j n)
-  default iextend :: (Monad m, Monad n,
-             Monad (t i j m), Monad (t j k n), Monad (t i k m),
-             Monad (t i j (t j k m)), Monad (t j k m), Monad (t i j n))
+  default iextend ::
+    (Monad m, Monad n,
+     Monad (t i k m), Monad (t j k m), Monad (t i j n),
+     Monad (t i j (t j k m)))
     => (t j k m ~> n) -> (t i k m ~> t i j n)
-  iextend f = iduplicate ~> MHask.imap f
+  iextend f = iduplicate ~>~ MHask.imap f
 
-  iduplicate :: (Monad m, Monad (t i k m), Monad (t i j (t j k m)))
+  iduplicate :: (Monad m)
     => t i k m ~> t i j (t j k m)
 
-  default iduplicate :: (Monad m, Monad (t i k m), Monad (t i j (t j k m)),
-                          (Monad (t j k (t j k m))), (Monad (t i j m)),  (Monad (t j k m)))
+  default iduplicate :: (Monad m, Monad (t j k m))
     => t i k m ~> t i j (t j k m)
   iduplicate = iextend id

@@ -15,8 +15,9 @@ import qualified MHask.Copointed as MHask
 import qualified MHask.Indexed.Functor as MHask
 
 class (MHask.IxFunctor t) => IxCopointed t where
-  iextract :: (Monad m, Monad (t i i m))
+  iextract :: (Monad m)
     => t i i m ~> m
-  default iextract :: (Monad m, Monad (t i i m), MHask.Copointed (t i i))
+  default iextract :: (Monad m,
+                       MHask.Copointed (t i i))
     => t i i m ~> m
   iextract = MHask.extract

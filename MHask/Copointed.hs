@@ -18,7 +18,7 @@ import qualified MHask.Functor as MHask
 
 
 class (MHask.Functor t) => Copointed t where
-  extract :: (Monad m, Monad (t m))
+  extract :: (Monad m)
     => t m ~> m
 
 

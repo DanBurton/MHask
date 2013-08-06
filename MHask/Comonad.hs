@@ -16,13 +16,16 @@ import qualified MHask.Copointed as MHask
 
 
 class (MHask.Copointed t) => Comonad t where
-  extend :: (Monad m, Monad n, Monad (t m), Monad (t n))
+  extend :: (Monad m, Monad n)
     => (t m ~> n) -> (t m ~> t n)
-  default extend :: (Monad m, Monad n, Monad (t m), Monad (t n),
+  default extend :: (Monad m, Monad n,
+                     Monad (t m), Monad (t n),
                      Monad (t (t m)))
     => (t m ~> n) -> (t m ~> t n)
-  extend f = duplicate ~> MHask.fmap f
+  extend f = duplicate ~>~ MHask.fmap f
 
-  duplicate :: (Monad m, Monad (t m), Monad (t (t m)))
+  duplicate :: (Monad m)
+    => t m ~> t (t m)
+  default duplicate :: (Monad m, Monad (t m))
     => t m ~> t (t m)
   duplicate = extend id
