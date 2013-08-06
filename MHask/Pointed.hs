@@ -1,7 +1,8 @@
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE Rank2Types #-}
 
--- no relevant comparison
+
+-- | Equivalent to transformers.Control.Monad.Trans.Class (MonadTrans)
 module MHask.Pointed where
 
 import Prelude hiding (return)
@@ -12,17 +13,16 @@ import Control.Monad (liftM)
 import Control.Monad.Trans.State
 import Control.Monad.Trans.Reader
 import Control.Monad.Trans.Writer
-import Control.Monad.Trans.Class
 
 import qualified MHask.Functor as MHask
 
+
+
+-- | The dual of "MHask.Copointed"
 class (MHask.Functor t) => Pointed t where
   return :: (Monad m)
-    => (m ~> t m)
+    => m ~> t m
 
-
--- This is basically MonadTrans
--- lift = MHask.return
 
 instance Pointed (StateT s) where
   return mx = StateT $ \s -> liftM (\x -> (x, s)) mx

@@ -1,7 +1,8 @@
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE Rank2Types #-}
 
--- Compare to base.Prelude.Functor (Functor)
+
+-- | Compare to base.Prelude.Functor (Functor)
 module MHask.Functor where
 
 import Prelude hiding (Functor, fmap)
@@ -12,7 +13,13 @@ import Control.Monad.Trans.Reader
 import Control.Monad.Trans.Writer
 
 
+
+-- | Functor is its own dual.
 class Functor t where
+  -- | Flipping the arrows on fmap's type signature
+  -- is just the same type signature in disguise.
+  -- 
+  -- > (m <~ n) -> (t m <~ t n)
   fmap :: (Monad m, Monad n)
     => (m ~> n) -> (t m ~> t n)
 

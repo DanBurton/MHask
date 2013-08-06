@@ -2,7 +2,7 @@
 {-# LANGUAGE Rank2Types #-}
 {-# LANGUAGE DefaultSignatures #-}
 
--- Compare to base.Prelude.Monad
+-- | Compare to base.Prelude (Monad)
 module MHask.Monad where
 
 import Prelude hiding (Monad, join)
@@ -12,11 +12,8 @@ import MHask.Util
 import qualified MHask.Functor as MHask
 import qualified MHask.Pointed as MHask
 
-import Control.Monad.Trans.State
-import Control.Monad.Trans.Reader
-import Control.Monad.Trans.Writer
 
-
+-- | Dual of "MHask.Comonad"
 class (MHask.Pointed t) => Monad t where
   join :: (P.Monad m)
     => t (t m) ~> t m
@@ -26,8 +23,9 @@ class (MHask.Pointed t) => Monad t where
 
   bind :: (P.Monad m, P.Monad n)
     => (m ~> t n) -> (t m ~> t n)
-  default bind :: (P.Monad m, P.Monad (t m),
-                   P.Monad n, P.Monad (t n),
-                   P.Monad (t (t n)))
+  default bind ::
+    (P.Monad m, P.Monad n,
+     P.Monad (t m), P.Monad (t n),
+     P.Monad (t (t n)))
     => (m ~> t n) -> (t m ~> t n)
   bind f = MHask.fmap f ~>~ join

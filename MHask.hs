@@ -1,16 +1,39 @@
 
-module MHask (module MHask) where
+-- | Various abstractions in the category of MHask.
+-- This re-exports everything, and should be imported
+-- qualified so that the operations and classes
+-- do not clash with their Hask counterparts.
+-- 
+-- > import qualified MHask
+module MHask (
+  -- * Prelimiaries
+  module MHask.Util,
 
-import MHask.Util as MHask
+  -- * Classes
+  module MHask.Functor,
+  module MHask.Pointed,
+  module MHask.Monad,
+  module MHask.Copointed,
+  module MHask.Comonad,
 
-import qualified MHask.Functor as MHask
-import qualified MHask.Pointed as MHask
-import qualified MHask.Monad   as MHask
-import qualified MHask.Copointed as MHask
-import qualified MHask.Comonad as MHask
+  -- * Indexed Classes
+  module MHask.Indexed.Functor,
+  module MHask.Indexed.Pointed,
+  module MHask.Indexed.Monad,
+  module MHask.Indexed.Copointed,
+  module MHask.Indexed.Comonad,
+  ) where
 
-import qualified MHask.Indexed.Functor as MHask
-import qualified MHask.Indexed.Pointed as MHask
-import qualified MHask.Indexed.Monad   as MHask
-import qualified MHask.Indexed.Copointed as MHask
-import qualified MHask.Indexed.Comonad as MHask
+import MHask.Util
+
+import MHask.Functor
+import MHask.Pointed
+import MHask.Monad
+import MHask.Copointed
+import MHask.Comonad
+
+import MHask.Indexed.Functor
+import MHask.Indexed.Pointed
+import MHask.Indexed.Monad
+import MHask.Indexed.Copointed
+import MHask.Indexed.Comonad

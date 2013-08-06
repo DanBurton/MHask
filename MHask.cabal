@@ -21,7 +21,7 @@ description:
   for Monad of the form @instance (Monad m) ⇒ Monad (t m)@, thus guaranteeing that @(t m)@
   (or @(t i j m)@ for the indexed types) is always a Monad. If it were valid Haskell, I'd write:
   .
-  > class (forall m. Monad m ⇒ Monad (t m)) Functor t
+  > class (forall m. Monad m ⇒ Monad (t m)) ⇒ Functor t
   .
   'MHask.Functor.Functor' should actually be called Endofunctor, because if m is an object in MHask,
   then an instance t of `Functor' can map object m to object (t m), and arrows from 
