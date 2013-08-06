@@ -3,6 +3,7 @@
 -- | Compare to indexed.Data.Functor.Indexed (IxFunctor)
 module MHask.Indexed.Functor where
 
+
 import MHask.Arrow
 
 

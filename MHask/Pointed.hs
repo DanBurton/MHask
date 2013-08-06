@@ -12,14 +12,18 @@ import Control.Monad.Trans.State
 import Control.Monad.Trans.Reader
 import Control.Monad.Trans.Writer
 
-import qualified MHask.Functor as MHask
 
+import qualified MHask.Functor as MHask
 
 
 -- | The dual of "MHask.Copointed"
 class (MHask.Functor t) => Pointed t where
   return :: (Monad m)
     => m ~> t m
+
+
+
+
 
 
 instance Pointed (StateT s) where

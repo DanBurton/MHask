@@ -12,6 +12,7 @@ import Control.Monad.Trans.Writer
 
 
 
+
 -- | Functor is its own dual.
 class Functor t where
   -- | Flipping the arrows on fmap's type signature
@@ -20,6 +21,10 @@ class Functor t where
   -- > (m <~ n) -> (t m <~ t n)
   fmap :: (Monad m, Monad n)
     => (m ~> n) -> (t m ~> t n)
+
+
+
+
 
 
 instance Functor (StateT s) where
