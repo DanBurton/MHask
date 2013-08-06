@@ -4,9 +4,9 @@ module MHask.Indexed.Functor where
 
 import MHask.Arrow
 
-import Control.Monad.Trans.State
-import Control.Monad.Trans.Reader
-import Control.Monad.Trans.Writer
+
+
+
 
 import qualified MHask.Functor as MHask
 

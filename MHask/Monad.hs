@@ -2,7 +2,7 @@
 -- | Compare to base.Prelude (Monad)
 module MHask.Monad where
 
-import Prelude hiding (Monad, join)
+import Prelude hiding (Monad)
 import qualified Prelude as P
 import MHask.Arrow
 
