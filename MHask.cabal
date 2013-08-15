@@ -10,12 +10,12 @@ description:
   .
   * Arrow composition is merely a specialization of Haskell function composition
   .
-  * The identity arrow for the object m is the `Prelude.id' function in Haskell,
+  * The identity arrow for an object m is the `Prelude.id' Haskell function
   specialized to @(forall x. m x → m x)@
   .
   It is assumed that any instances of the classes provided here also have an instance
   for Monad of the form @instance (Monad m) ⇒ Monad (t m)@, thus guaranteeing that @(t m)@
-  (or @(t i j m)@ for the indexed types) is always a Monad. If it were valid Haskell, I'd write:
+  is always a Monad. If it were valid Haskell, I'd write:
   .
   > class (forall m. Monad m ⇒ Monad (t m)) ⇒ Functor t
   .
