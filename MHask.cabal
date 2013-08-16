@@ -1,6 +1,7 @@
 name:                MHask
 version:             0.3.0.0
 synopsis:            The category of monads
+stability:           experimental
 description:         
   MHask is the category where
   .
@@ -25,6 +26,7 @@ description:
 
 
 homepage:            https://github.com/DanBurton/MHask#readme
+bug-reports:         https://github.com/DanBurton/MHask/issues
 license:             BSD3
 license-file:        LICENSE
 author:              Dan Burton
