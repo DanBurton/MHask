@@ -13,6 +13,15 @@ import qualified MHask.Pointed as MHask
 
 -- | Dual of "MHask.Comonad"
 class (MHask.Pointed t) => Monad t where
+  -- | Instances must satisfy the following laws:
+  -- 
+  -- > return ~>~ join ≡ identityArrow
+  -- > fmap f ~>~ join ≡ join ~>~ f
+  -- 
+  -- The culmination of these laws
+  -- allows us to state the following:
+  -- 
+  -- > return ~>~ fmap f ~>~ join ≡ f
   join :: (P.Monad m)
     => t (t m) ~> t m
   default join :: (P.Monad m, P.Monad (t m))

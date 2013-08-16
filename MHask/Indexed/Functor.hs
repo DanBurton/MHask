@@ -19,6 +19,11 @@ class IxFunctor t where
   -- is just the same type signature in disguise.
   -- 
   -- > (m <~ n) -> (t i j m <~ t i j n)
+  -- 
+  -- Any implementation of @imap@ must obey Functor laws.
+  -- 
+  -- > imap identityArrow ≡ identityArrow
+  -- > imap (f ~>~ g) ≡ imap f ~>~ imap g
   imap :: (Monad m, Monad n)
     => (m ~> n) -> (t i j m ~> t i j n)
   default imap :: (Monad m, Monad n,

@@ -18,6 +18,9 @@ import qualified MHask.Functor as MHask
 
 -- | The dual of "MHask.Copointed"
 class (MHask.Functor t) => Pointed t where
+  -- | Instances must obey the following law:
+  -- 
+  -- > return ~>~ fmap f ≡ f ~>~ return
   return :: (Monad m)
     => m ~> t m
 

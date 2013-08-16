@@ -19,6 +19,11 @@ class Functor t where
   -- is just the same type signature in disguise.
   -- 
   -- > (m <~ n) -> (t m <~ t n)
+  -- 
+  -- Any implementation of @fmap@ must obey Functor laws.
+  -- 
+  -- > fmap identityArrow ≡ identityArrow
+  -- > fmap (f ~>~ g) ≡ fmap f ~>~ fmap g
   fmap :: (Monad m, Monad n)
     => (m ~> n) -> (t m ~> t n)
 

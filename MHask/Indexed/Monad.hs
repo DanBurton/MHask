@@ -13,6 +13,15 @@ import qualified MHask.Indexed.Functor as MHask
 -- | Indexed version of "MHask.Monad".
 -- Dual of "MHask.Indexed.Comonad"
 class (MHask.IxPointed t) => IxMonad t where
+  -- | Instances must satisfy the following laws:
+  -- 
+  -- > ireturn ~>~ ijoin ≡ identityArrow
+  -- > imap f  ~>~ ijoin ≡ ijoin ~>~ f
+  -- 
+  -- The culmination of these laws
+  -- allows us to state the following:
+  -- 
+  -- > ireturn ~>~ imap f ~>~ ijoin ≡ f
   ijoin :: (Monad m)
     => t i j (t j k m) ~> t i k m
   default ijoin :: (Monad m, Monad (t j k m))

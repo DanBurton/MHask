@@ -13,6 +13,15 @@ import qualified MHask.Copointed as MHask
 
 -- | Dual of "MHask.Monad"
 class (MHask.Copointed t) => Comonad t where
+  -- | Instances must satisfy the following laws:
+  -- 
+  -- > extract ~<~ duplicate ≡ identityArrow
+  -- > fmap f  ~<~ duplicate ≡ duplicate ~<~ f
+  -- 
+  -- The culmination of these laws
+  -- allows us to state the following:
+  -- 
+  -- > extract ~<~ fmap f ~<~ duplicate ≡ f
   duplicate :: (Monad m)
     => t (t m) <~ t m
   default duplicate :: (Monad m, Monad (t m))

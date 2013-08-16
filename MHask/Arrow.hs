@@ -23,21 +23,53 @@
 -- to default implementations.
 module MHask.Arrow where
 
--- | The @~>@ type represents arrows in the
--- category of MHask. 
+
+-- | The @~>@ type is the type of arrows in the
+-- category of MHask. However, it does not include
+-- Monad constraints on m and n. These constraints should
+-- instead appear at the head of any type signature that
+-- uses the @~>@ type.
 type m ~> n = forall x. m x -> n x
+
 
 -- | It's just @~>@ flipped.
 -- 
 -- > type m <~ n = n ~> m
 type m <~ n = n ~> m
 
+
 -- | Left-to-right composition of arrows in MHask.
-(~>~) :: (Monad a, Monad b, Monad c) => (a ~> b) -> (b ~> c) -> (a ~> c)
+-- 
+-- This satisfies the category laws for arrow composition in MHask.
+-- In other words, arrow composition in MHask is associative.
+-- 
+-- > f ~>~ (g ~>~ h) ≡ (f ~>~ g) ~>~ h
+(~>~) :: (Monad m, Monad m', Monad n) => (m ~> m') -> (m' ~> n) -> (m ~> n)
 f1 ~>~ f2 = f2 . f1
+{-# INLINE (~>~) #-}
+
 
 -- | It's just @~>~@ flipped.
+-- Notice how its type signature is the same as @~>~@,
+-- just with the arrows flipped.
 -- 
 -- > (~<~) = flip (~>~)
-(~<~) :: (Monad a, Monad b, Monad c) => (c <~ b) -> (b <~ a) -> (c <~ a)
+(~<~) :: (Monad m, Monad m', Monad n) => (m <~ m') -> (m' <~ n) -> (m <~ n)
 (~<~) = flip (~>~)
+{-# INLINE (~<~) #-}
+
+
+-- | The `identityArrow` is a polymorphic value which
+-- specializes to the identity arrow for any given object @m@ in MHask.
+-- 
+-- > identityArrow = id
+-- 
+-- This satisfies the category laws for identity arrows in MHask.
+-- In other words, it serves as both the left- and right-identity
+-- of arrow composition in MHask.
+-- 
+-- > identityArrow ~>~ x ≡ x
+-- > x ~>~ identityArrow ≡ x
+identityArrow :: (Monad m) => m ~> m
+identityArrow = id
+{-# INLINE identityArrow #-}

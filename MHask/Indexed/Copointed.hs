@@ -18,6 +18,9 @@ import qualified MHask.Indexed.Functor as MHask
 -- | The indexed version of "MHask.Copointed".
 -- The dual of "MHask.Indexed.Pointed".
 class (MHask.IxFunctor t) => IxCopointed t where
+  -- | Instances must obey the following law:
+  -- 
+  -- > iextract ~<~ imap f ≡ f ~<~ iextract
   iextract :: (Monad m)
     => m <~ t i i m
   default iextract :: (Monad m,
