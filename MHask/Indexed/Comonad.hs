@@ -13,21 +13,18 @@ import qualified MHask.Indexed.Copointed as MHask
 -- | Indexed version of "MHask.Comonad".
 -- Dual of "MHask.Indexed.Monad"
 class (MHask.IxCopointed t) => IxComonad t where
-  -- | Instances must satisfy the following laws:
+  -- | Instances must satisfy the following law:
   -- 
-  -- > iextend ~<~ iduplicate ≡ identityArrow
-  -- > imap f  ~<~ iduplicate ≡ iduplicate ~<~ f
-  -- 
-  -- The culmination of these laws
-  -- allows us to state the following:
-  -- 
-  -- > iextend ~<~ imap f ~<~ iduplicate ≡ f
+  -- > iextract ~<~ iduplicate ≡ identityArrow
   iduplicate :: (Monad m)
     => t i j (t j k m) <~ t i k m
   default iduplicate :: (Monad m, Monad (t j k m))
     => t i j (t j k m) <~ t i k m
-  iduplicate = iextend id
+  iduplicate = iextend identityArrow
 
+  -- | Instances must satisfy the following law:
+  -- 
+  -- > iextend iextract ≡ identityArrow
   iextend :: (Monad m, Monad n)
     => (m <~ t j k n) -> (t i j m <~ t i k n)
   default iextend ::

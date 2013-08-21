@@ -13,13 +13,14 @@ import Control.Monad.Trans.Reader
 import Control.Monad.Trans.Writer
 
 
-import qualified MHask.Functor as MHask
+import qualified MHask.Duplicate as MHask
 
 
 -- | The dual of "MHask.Copointed"
-class (MHask.Functor t) => Pointed t where
-  -- | Instances must obey the following law:
+class (MHask.Duplicate t) => Pointed t where
+  -- | Instances must obey the following laws:
   -- 
+  -- > duplicate === return :: t m ~> t (t m)
   -- > return ~>~ fmap f ≡ f ~>~ return
   return :: (Monad m)
     => m ~> t m
@@ -28,7 +29,7 @@ class (MHask.Functor t) => Pointed t where
 
 
 
-
+{-
 instance Pointed (StateT s) where
   return mx = StateT $ \s -> liftM (\x -> (x, s)) mx
 
@@ -37,3 +38,5 @@ instance Pointed (ReaderT r) where
 
 instance Monoid w => Pointed (WriterT w) where
   return mx = WriterT $ liftM (\x -> (x, mempty)) mx
+-}
+

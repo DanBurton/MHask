@@ -15,19 +15,22 @@ import qualified MHask.Indexed.Functor as MHask
 class (MHask.IxPointed t) => IxMonad t where
   -- | Instances must satisfy the following laws:
   -- 
-  -- > ireturn ~>~ ijoin ≡ identityArrow
-  -- > imap f  ~>~ ijoin ≡ ijoin ~>~ f
+  -- > imap ijoin    ~>~ ijoin ≡ ijoin ~>~ ijoin
+  -- > imap (imap f) ~>~ ijoin ≡ ijoin ~>~ imap f
   -- 
-  -- The culmination of these laws
-  -- allows us to state the following:
-  -- 
-  -- > ireturn ~>~ imap f ~>~ ijoin ≡ f
+  -- >      ireturn ~>~ ijoin ≡ identityArrow
+  -- > imap ireturn ~>~ ijoin ≡ identityArrow
   ijoin :: (Monad m)
     => t i j (t j k m) ~> t i k m
   default ijoin :: (Monad m, Monad (t j k m))
     => t i j (t j k m) ~> t i k m
   ijoin = ibind id
 
+  -- | Instances must satisfy the following laws
+  -- 
+  -- > ibind ireturn ≡ identityArrow
+  -- > ireturn ~>~ ibind f ≡ f
+  -- > ibind f ~>~ ibind g ≡ bind (f ~>~ bind g)
   ibind :: (Monad m, Monad n)
     => (m ~> t j k n) -> (t i j m ~> t i k n)
   default ibind ::

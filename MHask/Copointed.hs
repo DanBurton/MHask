@@ -13,13 +13,14 @@ import Control.Monad.Trans.Reader
 import Control.Monad.Trans.Writer
 
 
-import qualified MHask.Functor as MHask
+import qualified MHask.Join as MHask
 
 
--- | The dual of "MHask.Pointed"
-class (MHask.Functor t) => Copointed t where
-  -- | Instances must obey the following law:
+-- | Dual of "MHask.Pointed".
+class (MHask.Join t) => Copointed t where
+  -- | Instances must obey the following laws:
   -- 
+  -- > join === extract :: t m <~ t (t m)
   -- > extract ~<~ fmap f ≡ f ~<~ extract
   extract :: (Monad m)
     => m <~ t m
@@ -28,7 +29,7 @@ class (MHask.Functor t) => Copointed t where
 
 
 
-
+{-
 instance (Monoid s) => Copointed (StateT s) where
   extract = flip evalStateT mempty
 
@@ -37,4 +38,5 @@ instance (Monoid r) => Copointed (ReaderT r) where
 
 instance Copointed (WriterT w) where
   extract = liftM fst . runWriterT
+-}
 
