@@ -12,7 +12,7 @@ import MHask.Arrow
 
 
 
-import qualified MHask.Copointed as MHask
+import qualified MHask.Copointed       as MHask
 import qualified MHask.Indexed.Functor as MHask
 
 -- | The indexed version of "MHask.Copointed".

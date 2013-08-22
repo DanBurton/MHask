@@ -7,21 +7,18 @@ module MHask.Indexed.Comonad where
 
 import MHask.Arrow
 
-import qualified MHask.Indexed.Functor as MHask
+import qualified MHask.Indexed.Functor   as MHask
+import qualified MHask.Indexed.Duplicate as MHask
 import qualified MHask.Indexed.Copointed as MHask
 
 -- | Indexed version of "MHask.Comonad".
 -- Dual of "MHask.Indexed.Monad"
-class (MHask.IxCopointed t) => IxComonad t where
-  -- | Instances must satisfy the following law:
-  -- 
-  -- > iextract ~<~ iduplicate ≡ identityArrow
-  iduplicate :: (Monad m)
-    => t i j (t j k m) <~ t i k m
-  default iduplicate :: (Monad m, Monad (t j k m))
-    => t i j (t j k m) <~ t i k m
-  iduplicate = iextend identityArrow
-
+-- 
+-- Instances must satisfy the following law:
+-- 
+-- > iextract      ~<~ iduplicate ≡ identityArrow
+-- > imap iextract ~<~ iduplicate ≡ identityArrow
+class (MHask.IxDuplicate t, MHask.IxCopointed t) => IxComonad t where
   -- | Instances must satisfy the following law:
   -- 
   -- > iextend iextract ≡ identityArrow
@@ -32,7 +29,7 @@ class (MHask.IxCopointed t) => IxComonad t where
      Monad (t i j m), Monad (t j k n), Monad (t i k n),
      Monad (t i j (t j k n)))
     => (m <~ t j k n) -> (t i j m <~ t i k n)
-  iextend f = MHask.imap f ~<~ iduplicate
+  iextend f = MHask.imap f ~<~ MHask.iduplicate
 
 
 -- | If you define your IxComonad in terms of iextend and iextract,
@@ -41,3 +38,8 @@ class (MHask.IxCopointed t) => IxComonad t where
 imapComonad :: (Monad m, Monad n, Monad (t j j n), IxComonad t)
   => (m <~ n) -> (t i j m <~ t i j n)
 imapComonad f = iextend (f ~<~ MHask.iextract)
+
+iduplicateComonad :: (Monad m, Monad (t j k m), IxComonad t)
+  => t i j (t j k m) <~ t i k m
+iduplicateComonad = iextend identityArrow
+

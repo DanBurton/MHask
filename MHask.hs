@@ -28,8 +28,8 @@ module MHask (
   module MHask.Indexed.Comonad,
   module MHask.Indexed.Join,
   module MHask.Indexed.Duplicate,
-  module MHask.Layered,
-  module MHask.UnFunctor,
+  module MHask.Indexed.Layered,
+  module MHask.Indexed.UnFunctor,
   ) where
 
 import MHask.Arrow

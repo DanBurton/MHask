@@ -7,25 +7,18 @@ module MHask.Indexed.Monad where
 
 import MHask.Arrow
 
-import qualified MHask.Indexed.Pointed as MHask
 import qualified MHask.Indexed.Functor as MHask
+import qualified MHask.Indexed.Join    as MHask
+import qualified MHask.Indexed.Pointed as MHask
 
 -- | Indexed version of "MHask.Monad".
 -- Dual of "MHask.Indexed.Comonad"
-class (MHask.IxPointed t) => IxMonad t where
-  -- | Instances must satisfy the following laws:
-  -- 
-  -- > imap ijoin    ~>~ ijoin ≡ ijoin ~>~ ijoin
-  -- > imap (imap f) ~>~ ijoin ≡ ijoin ~>~ imap f
-  -- 
-  -- >      ireturn ~>~ ijoin ≡ identityArrow
-  -- > imap ireturn ~>~ ijoin ≡ identityArrow
-  ijoin :: (Monad m)
-    => t i j (t j k m) ~> t i k m
-  default ijoin :: (Monad m, Monad (t j k m))
-    => t i j (t j k m) ~> t i k m
-  ijoin = ibind id
-
+-- 
+-- Instances must satisfy the following laws:
+-- 
+-- >      ireturn ~>~ ijoin ≡ identityArrow
+-- > imap ireturn ~>~ ijoin ≡ identityArrow
+class (MHask.IxJoin t, MHask.IxPointed t) => IxMonad t where
   -- | Instances must satisfy the following laws
   -- 
   -- > ibind ireturn ≡ identityArrow
@@ -38,7 +31,7 @@ class (MHask.IxPointed t) => IxMonad t where
      Monad (t i j m), Monad (t j k n), Monad (t i k n),
      Monad (t i j (t j k n)))
     => (m ~> t j k n) -> (t i j m ~> t i k n)
-  ibind f = MHask.imap f ~>~ ijoin
+  ibind f = MHask.imap f ~>~ MHask.ijoin
 
 
 -- | If you define your IxMonad in terms of ibind and ireturn,
@@ -47,3 +40,8 @@ class (MHask.IxPointed t) => IxMonad t where
 imapMonad :: (Monad m, Monad n, Monad (t j j n), IxMonad t)
   => (m ~> n) -> (t i j m ~> t i j n)
 imapMonad f = ibind (f ~>~ MHask.ireturn)
+
+ijoinMonad :: (Monad m, Monad (t j k m), IxMonad t)
+  => t i j (t j k m) ~> t i k m
+ijoinMonad = ibind identityArrow
+
