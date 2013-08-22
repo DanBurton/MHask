@@ -6,7 +6,7 @@ import MHask.Arrow
 
 import qualified MHask.Functor as MHask
 
--- Dual of "MHask.Duplicate".
+-- | Dual of "MHask.Duplicate".
 class (MHask.Functor t) => Join t where
   -- | Any instances must satisfy the following laws:
   -- 
