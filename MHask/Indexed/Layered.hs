@@ -9,7 +9,8 @@ import qualified MHask.Indexed.Join      as MHask
 import qualified MHask.Indexed.Duplicate as MHask
 
 -- | IxLayered is its own dual.
-class (MHask.IxJoin t, MHask.IxDuplicate t) => IxLayered t where
+class (MHask.IxJoin t, MHask.IxDuplicate t)
+  => IxLayered t where
   -- | Any instances must satisfy the following laws:
   -- 
   -- > iduplicate ~>~ ijoin ≡ identityArrow ∷ t i j m -> t i j m
