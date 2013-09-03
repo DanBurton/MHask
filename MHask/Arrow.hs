@@ -3,8 +3,8 @@
 -- | This module sets the stage for the rest of the package.
 -- It defines a type synonym @~>@ which cleans up the
 -- type signatures,
--- and  @~>~@ which is used in the default implementation
--- of bind. These represent the type of arrows and arrow composition
+-- and  @~>~@ which is used in default implementations.
+-- These represent the type of arrows and arrow composition
 -- in MHask, respectively.
 -- 
 -- By using @~>@, type signatures for the MHask class operations
@@ -73,3 +73,4 @@ f1 ~>~ f2 = f2 . f1
 identityArrow :: (Monad m) => m ~> m
 identityArrow = id
 {-# INLINE identityArrow #-}
+

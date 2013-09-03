@@ -23,7 +23,7 @@ class Functor t where
   -- Any implementation of @fmap@ must obey Functor laws.
   -- 
   -- > fmap identityArrow ≡ identityArrow
-  -- > fmap (f ~>~ g) ≡ fmap f ~>~ fmap g
+  -- > fmap (f ~>~ g)     ≡ fmap f ~>~ fmap g
   fmap :: (Monad m, Monad n)
     => (m ~> n) -> (t m ~> t n)
 

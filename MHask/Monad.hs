@@ -36,15 +36,13 @@ class (MHask.Layered t, MHask.Pointed t) => Monad t where
 
 
 -- | If you define your Monad in terms of bind and return,
--- then you get a free implementation of fmap which can
--- be used for Functor.
+-- then you get a free implementation of fmap.
 fmapMonad :: (P.Monad m, P.Monad n, P.Monad (t n), Monad t)
   => (m ~> n) -> (t m ~> t n)
 fmapMonad f = bind (f ~>~ MHask.return)
 
--- | If you define your Monad in terms of bind and return,
--- then you can get a free implementation of join which can
--- be used for Join.
+-- | If you define your Monad in terms of @bind@ and @return@,
+-- then you can get a free implementation of @join@.
 joinMonad :: (P.Monad m, P.Monad (t m), Monad t)
   => t (t m) ~> t m
 joinMonad = bind identityArrow

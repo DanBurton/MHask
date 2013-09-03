@@ -1,6 +1,5 @@
 {-# LANGUAGE RankNTypes, TypeOperators, DefaultSignatures #-}
 
--- | No comparison that I'm aware of.
 module MHask.UnFunctor where
 
 import MHask.Arrow
@@ -9,13 +8,12 @@ import qualified MHask.Pointed   as MHask
 import qualified MHask.Copointed as MHask
 import qualified MHask.Monad     as MHask
 import qualified MHask.Comonad   as MHask
-import qualified MHask.Layered   as MHask
 
 -- | UnFunctor is its own dual.
 -- 
 -- The @unFmap@ operation is a generalization of @withLayer@,
 -- and is the inverse of @fmap@.
-class (MHask.Layered t, MHask.Monad t, MHask.Comonad t)
+class (MHask.Monad t, MHask.Comonad t)
   => UnFunctor t where
   -- | Any instances must satisfy the following laws:
   -- 

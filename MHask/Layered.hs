@@ -1,23 +1,29 @@
 {-# LANGUAGE RankNTypes, TypeOperators, DefaultSignatures #-}
 
--- | No comparison that I'm aware of.
 module MHask.Layered where
 
 import MHask.Arrow
+
+
 
 import qualified MHask.Join      as MHask
 import qualified MHask.Duplicate as MHask
 
 -- | Layered is its own dual.
-class (MHask.Join t, MHask.Duplicate t) => Layered t where
+
+
+
+class (MHask.Join t, MHask.Duplicate t)
+  => Layered t where
   -- | Any instances must satisfy the following law:
   -- 
   -- > duplicate ~>~ join ≡ identityArrow ∷ t m ~> t m
   -- 
+  -- 
   -- Custom implementations should be equivalent to the
   -- default implementation
   -- 
-  -- withLayer f ≡ duplicate ~>~ f ~>~ join
+  -- > withLayer f ≡ duplicate ~>~ f ~>~ join
   -- 
   -- From all laws required so far, it follows that:
   -- 
