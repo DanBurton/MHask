@@ -12,6 +12,10 @@ import qualified MHask.Duplicate as MHask
 import qualified MHask.Layered   as MHask
 import qualified MHask.Copointed as MHask
 
+import qualified MHask.Impl.Identity as I
+import qualified MHask.Impl.State    as S
+import qualified MHask.Impl.Reader   as R
+
 
 -- | Dual of "MHask.Monad".
 -- 
@@ -47,3 +51,7 @@ duplicateComonad :: (Monad m, Monad (t m), Comonad t)
   => t (t m) <~ t m
 duplicateComonad = extend identityArrow
 
+
+instance Comonad I.IdentityT
+instance (S.Monoid s) => Comonad (S.StateT s)
+instance (R.Monoid r) => Comonad (R.ReaderT r)

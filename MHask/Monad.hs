@@ -12,6 +12,10 @@ import qualified MHask.Join    as MHask
 import qualified MHask.Layered as MHask
 import qualified MHask.Pointed as MHask
 
+import qualified MHask.Impl.Identity as I
+import qualified MHask.Impl.State    as S
+import qualified MHask.Impl.Reader   as R
+
 
 -- | Dual of "MHask.Comonad"
 -- 
@@ -47,3 +51,7 @@ joinMonad :: (P.Monad m, P.Monad (t m), Monad t)
   => t (t m) ~> t m
 joinMonad = bind identityArrow
 
+
+instance Monad I.IdentityT
+instance (S.Monoid s) => Monad (S.StateT s)
+instance (R.Monoid r) => Monad (R.ReaderT r)

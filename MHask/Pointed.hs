@@ -9,6 +9,9 @@ import Control.Monad.Trans.Class
 
 import qualified MHask.Duplicate as MHask
 
+import qualified MHask.Impl.Identity as I
+import qualified MHask.Impl.State    as S
+import qualified MHask.Impl.Reader   as R
 
 -- | Dual of "MHask.Copointed"
 class (MHask.Duplicate t) => Pointed t where
@@ -23,3 +26,6 @@ class (MHask.Duplicate t) => Pointed t where
   return = lift
 
 
+instance Pointed I.IdentityT
+instance Pointed (S.StateT s)
+instance Pointed (R.ReaderT r)

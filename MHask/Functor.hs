@@ -6,8 +6,9 @@ module MHask.Functor where
 import Prelude hiding (Functor, fmap)
 import MHask.Arrow
 
-import Control.Monad.Trans.State
-import Control.Monad.Trans.Reader
+import qualified MHask.Impl.Identity as I
+import qualified MHask.Impl.State    as S
+import qualified MHask.Impl.Reader   as R
 import Control.Monad.Trans.Writer
 
 
@@ -32,11 +33,14 @@ class Functor t where
 
 
 
-instance Functor (StateT s) where
-  fmap f m = StateT $ \s -> f (runStateT m s)
+instance Functor I.IdentityT where
+  fmap = I.fmap
 
-instance Functor (ReaderT r) where
-  fmap f m = ReaderT $ \r -> f (runReaderT m r)
+instance Functor (S.StateT s) where
+  fmap = S.fmap
+
+instance Functor (R.ReaderT r) where
+  fmap = R.fmap
 
 instance Functor (WriterT w) where
   fmap f m = WriterT $ f (runWriterT m)

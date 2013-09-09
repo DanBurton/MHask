@@ -9,6 +9,9 @@ import MHask.Arrow
 
 import qualified MHask.Join as MHask
 
+import qualified MHask.Impl.Identity as I
+import qualified MHask.Impl.State    as S
+import qualified MHask.Impl.Reader   as R
 
 -- | Dual of "MHask.Pointed".
 class (MHask.Join t) => Copointed t where
@@ -19,3 +22,12 @@ class (MHask.Join t) => Copointed t where
   extract :: (Monad m)
     => m <~ t m
 
+
+instance Copointed I.IdentityT where
+  extract = I.extract
+
+instance (S.Monoid s) => Copointed (S.StateT s) where
+  extract = S.extract
+
+instance (R.Monoid r) => Copointed (R.ReaderT r) where
+  extract = R.extract

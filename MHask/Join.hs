@@ -6,6 +6,10 @@ import MHask.Arrow
 
 import qualified MHask.Functor as MHask
 
+import qualified MHask.Impl.Identity as I
+import qualified MHask.Impl.State    as S
+import qualified MHask.Impl.Reader   as R
+
 -- | Dual of "MHask.Duplicate".
 class (MHask.Functor t) => Join t where
   -- | Any instances must satisfy the following laws:
@@ -14,3 +18,12 @@ class (MHask.Functor t) => Join t where
   -- > fmap (fmap f) ~>~ join ≡ join ~>~ fmap f
   join :: Monad m => t (t m) ~> t m
 
+
+instance Join I.IdentityT where
+  join = I.extract
+
+instance (S.Monoid s) => Join (S.StateT s) where
+  join = S.extract
+
+instance (R.Monoid r) => Join (R.ReaderT r) where
+  join = R.extract

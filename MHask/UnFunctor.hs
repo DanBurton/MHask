@@ -9,6 +9,10 @@ import qualified MHask.Copointed as MHask
 import qualified MHask.Monad     as MHask
 import qualified MHask.Comonad   as MHask
 
+import qualified MHask.Impl.Identity as I
+import qualified MHask.Impl.State    as S
+import qualified MHask.Impl.Reader   as R
+
 -- | UnFunctor is its own dual.
 -- 
 -- The @unFmap@ operation is a generalization of @withLayer@,
@@ -45,3 +49,7 @@ class (MHask.Monad t, MHask.Comonad t)
     => (t m ~> t n) -> (m ~> n)
   unFmap f = MHask.return ~>~ f ~>~ MHask.extract
 
+
+instance UnFunctor I.IdentityT
+instance (S.Monoid s) => UnFunctor (S.StateT s)
+instance (R.Monoid r) => UnFunctor (R.ReaderT r)
