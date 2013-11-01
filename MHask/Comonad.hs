@@ -15,6 +15,7 @@ import qualified MHask.Copointed as MHask
 import qualified MHask.Impl.Identity as I
 import qualified MHask.Impl.State    as S
 import qualified MHask.Impl.Reader   as R
+import qualified MHask.Impl.Writer   as W
 
 
 -- | Dual of "MHask.Monad".
@@ -55,3 +56,4 @@ duplicateComonad = extend identityArrow
 instance Comonad I.IdentityT
 instance (S.Monoid s) => Comonad (S.StateT s)
 instance (R.Monoid r) => Comonad (R.ReaderT r)
+instance (W.Monoid w) => Comonad (W.WriterT w)

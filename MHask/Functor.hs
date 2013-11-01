@@ -9,7 +9,7 @@ import MHask.Arrow
 import qualified MHask.Impl.Identity as I
 import qualified MHask.Impl.State    as S
 import qualified MHask.Impl.Reader   as R
-import Control.Monad.Trans.Writer
+import qualified MHask.Impl.Writer   as W
 
 
 
@@ -42,6 +42,6 @@ instance Functor (S.StateT s) where
 instance Functor (R.ReaderT r) where
   fmap = R.fmap
 
-instance Functor (WriterT w) where
-  fmap f m = WriterT $ f (runWriterT m)
+instance Functor (W.WriterT w) where
+  fmap = W.fmap
 

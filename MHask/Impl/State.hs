@@ -7,7 +7,7 @@ module MHask.Impl.State
   , extract
   ) where
 
-import Prelude hiding (fmap, return)
+import Prelude hiding (fmap)
 import Data.Monoid
 import MHask.Arrow
 

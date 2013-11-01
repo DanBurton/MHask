@@ -45,28 +45,34 @@ source-repository this
   tag:      MHask-0.4.0.0
 
 library
-  exposed-modules:     MHask,
-                         MHask.Comonad,
-                         MHask.Monad,
-                         MHask.Copointed,
-                         MHask.Pointed,
-                         MHask.Arrow,
-                         MHask.Functor,
-                         MHask.Join,
-                         MHask.Duplicate,
-                         MHask.Layered,
-                         MHask.UnFunctor,
-                           MHask.Indexed.Comonad,
-                           MHask.Indexed.Monad,
-                           MHask.Indexed.Copointed,
-                           MHask.Indexed.Pointed,
-                           MHask.Indexed.Functor
-                           MHask.Indexed.Join,
-                           MHask.Indexed.Duplicate,
-                           MHask.Indexed.Layered,
-                           MHask.Indexed.UnFunctor
+  exposed-modules:
+     MHask,
+       MHask.Comonad,
+       MHask.Monad,
+       MHask.Copointed,
+       MHask.Pointed,
+       MHask.Arrow,
+       MHask.Functor,
+       MHask.Join,
+       MHask.Duplicate,
+       MHask.Layered,
+       MHask.UnFunctor,
+         MHask.Indexed.Comonad,
+         MHask.Indexed.Monad,
+         MHask.Indexed.Copointed,
+         MHask.Indexed.Pointed,
+         MHask.Indexed.Functor
+         MHask.Indexed.Join,
+         MHask.Indexed.Duplicate,
+         MHask.Indexed.Layered,
+         MHask.Indexed.UnFunctor
+  other-modules
+    MHask.Impl.Identity
+    MHask.Impl.Reader
+    MHask.Impl.State
+    MHask.Impl.Writer
 
-  build-depends:       base >= 2 && < 4.7, transformers >= 0.3
+  build-depends:       base >= 2 && < 5, transformers >= 0.3
 
   ghc-options:         -Wall
 

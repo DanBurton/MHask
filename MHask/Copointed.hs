@@ -12,6 +12,8 @@ import qualified MHask.Join as MHask
 import qualified MHask.Impl.Identity as I
 import qualified MHask.Impl.State    as S
 import qualified MHask.Impl.Reader   as R
+import qualified MHask.Impl.Writer   as W
+
 
 -- | Dual of "MHask.Pointed".
 class (MHask.Join t) => Copointed t where
@@ -31,3 +33,6 @@ instance (S.Monoid s) => Copointed (S.StateT s) where
 
 instance (R.Monoid r) => Copointed (R.ReaderT r) where
   extract = R.extract
+
+instance (W.Monoid w) => Copointed (W.WriterT w) where
+  extract = W.extract

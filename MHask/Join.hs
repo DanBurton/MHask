@@ -9,6 +9,8 @@ import qualified MHask.Functor as MHask
 import qualified MHask.Impl.Identity as I
 import qualified MHask.Impl.State    as S
 import qualified MHask.Impl.Reader   as R
+import qualified MHask.Impl.Writer   as W
+
 
 -- | Dual of "MHask.Duplicate".
 class (MHask.Functor t) => Join t where
@@ -27,3 +29,7 @@ instance (S.Monoid s) => Join (S.StateT s) where
 
 instance (R.Monoid r) => Join (R.ReaderT r) where
   join = R.extract
+
+-- Not sure why this requires Monoid. It shouldn't.
+instance (W.Monoid w) => Join (W.WriterT w) where
+  join = W.extract

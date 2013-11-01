@@ -3,7 +3,6 @@
 module MHask.Impl.Identity
   ( IdentityT
   , fmap
-  , return
   , extract
   ) where
 
@@ -16,10 +15,6 @@ import Control.Monad.Trans.Class (lift)
 fmap :: (Monad m, Monad n)
   => (m ~> n) -> (IdentityT m ~> IdentityT n)
 fmap f m = IdentityT (f (runIdentityT m))
-
-return :: (Monad m)
-  => m ~> IdentityT m
-return = IdentityT
 
 extract :: (Monad m)
   => m <~ IdentityT m

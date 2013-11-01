@@ -10,6 +10,8 @@ import qualified MHask.Functor as MHask
 import qualified MHask.Impl.Identity as I
 import qualified MHask.Impl.State    as S
 import qualified MHask.Impl.Reader   as R
+import qualified MHask.Impl.Writer   as W
+
 
 -- | Dual of "MHask.Join".
 class (MHask.Functor t) => Duplicate t where
@@ -26,3 +28,4 @@ class (MHask.Functor t) => Duplicate t where
 instance Duplicate I.IdentityT
 instance Duplicate (S.StateT s)
 instance Duplicate (R.ReaderT r)
+instance (W.Monoid w) => Duplicate (W.WriterT w)

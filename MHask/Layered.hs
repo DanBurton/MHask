@@ -12,6 +12,8 @@ import qualified MHask.Duplicate as MHask
 import qualified MHask.Impl.Identity as I
 import qualified MHask.Impl.State    as S
 import qualified MHask.Impl.Reader   as R
+import qualified MHask.Impl.Writer   as W
+
 
 -- | Layered is its own dual.
 
@@ -56,3 +58,4 @@ class (MHask.Join t, MHask.Duplicate t)
 instance Layered I.IdentityT
 instance (S.Monoid s) => Layered (S.StateT s)
 instance (R.Monoid r) => Layered (R.ReaderT r)
+instance (W.Monoid w) => Layered (W.WriterT w)
